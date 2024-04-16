@@ -51,12 +51,12 @@ class VendorSweet(db.Model, SerializerMixin):
     serialize_rules = ('-sweet.vendor_sweets', '-vendor.vendor_sweets')
 
     @validates('price')
-    def validate_price(self, key, value):
-        if value is None:
+    def validate_price(self, key, price):
+        if price is None:
             raise ValueError('Price cannot be None')
-        if value < 0:
+        if price < 0:
             raise ValueError('Price cannot be negative')
-        return value
+        return price
 
     def __repr__(self):
         return f'<VendorSweet {self.id}>'
